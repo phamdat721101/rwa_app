@@ -8,14 +8,90 @@ import { Progress } from "@/components/ui/progress"
 import { Table, TableBody, TableCell, TableRow } from "@/components/ui/table"
 import { FileText } from 'lucide-react'
 import { InvestmentSimulator } from "@/components/InvestmentSimulator/investment-simulator"
+import { TokenInteractions } from '@/utils/contract';
+import { useEffect, useState } from "react";
+import { TokenParticipationModal } from './TokenCreate';
 
 export default function PropertyDetails() {
+  const token = 'COP';
+  const [account, setAccount] = useState('');
+  const propertyID = 1234;
+
+  useEffect(() => {
+    let wallet = sessionStorage.getItem('address') as string;
+    console.log(wallet);
+    setAccount(wallet);
+  }, [])
+  // Buy tokens handler
+  const handleBuyTokens = async () => {
+    try {
+      const txReceipt = await TokenInteractions.transfer(
+        account,
+        '0x5cd31958780C1fD6C2325aB7CD75112cDbae10E6',
+        '1000000'
+      );
+
+      console.log(txReceipt);
+
+      // Update balance after buying
+      // const newBalance = await TokenInteractions.getBalance(account);
+      // console.log('New balance:', newBalance);
+
+      //alert('Tokens purchased successfully!');
+    }
+    catch (error) {
+      console.error('Token purchase failed:', error);
+    }
+  };
+
+  const handleSellTokens = async () => {
+    try {
+      const txReceipt = await TokenInteractions.transfer(
+        account,
+        '0x5cd31958780C1fD6C2325aB7CD75112cDbae10E6',
+        '1000000'
+      );
+
+      console.log(txReceipt);
+
+      // Update balance after buying
+      // const newBalance = await TokenInteractions.getBalance(account);
+      // console.log('New balance:', newBalance);
+
+      //alert('Tokens purchased successfully!');
+    }
+    catch (error) {
+      console.error('Token purchase failed:', error);
+    }
+  };
+
+  const handleTokenParticipation = async (details: {
+    id: number, 
+    tokenName: string, 
+    tokenSymbol: string, 
+    totalSupply: string
+  }) => {
+    try {
+      // Here you would typically interact with a smart contract 
+      // or backend to create or register the token
+      //console.log('Token Details Submitted:', details);
+      
+      // Example: Call a method to create token
+      // await TokenInteractions.createToken(details);
+
+      //alert('Token details submitted successfully!');
+    } catch (error) {
+      //console.error('Token submission failed:', error);
+      //alert('Failed to submit token details');
+    }
+  };
+
   return (
     <div className="max-w-[1400px] mx-auto">
       {/* Banner Image */}
       <div className="relative w-full h-[280px] mb-6">
         <Image
-          src="/house1.jpg"
+          src="/real1.png"
           alt="Hashtag98 Hotel"
           fill
           className="object-cover rounded-lg"
@@ -142,27 +218,27 @@ export default function PropertyDetails() {
                       <TableBody>
                         <TableRow className="hover:bg-muted/50">
                           <TableCell className="font-medium">Cost of property</TableCell>
-                          <TableCell className="text-right">COP 490,000,000.00</TableCell>
+                          <TableCell className="text-right">{token} 490,000,000.00</TableCell>
                         </TableRow>
                         <TableRow className="hover:bg-muted/50">
                           <TableCell className="font-medium">LaProp fee</TableCell>
-                          <TableCell className="text-right">COP 14,700,000.00</TableCell>
+                          <TableCell className="text-right">{token} 14,700,000.00</TableCell>
                         </TableRow>
                         <TableRow className="hover:bg-muted/50">
                           <TableCell className="font-medium">Notary fees</TableCell>
-                          <TableCell className="text-right">COP 9,200,000.00</TableCell>
+                          <TableCell className="text-right">{token} 9,200,000.00</TableCell>
                         </TableRow>
                         <TableRow className="hover:bg-muted/50">
                           <TableCell className="font-medium">Exchange & transactions fees</TableCell>
-                          <TableCell className="text-right">COP 1,049,400.00</TableCell>
+                          <TableCell className="text-right">{token} 1,049,400.00</TableCell>
                         </TableRow>
                         <TableRow className="hover:bg-muted/50">
                           <TableCell className="font-medium">Maintanance reserve</TableCell>
-                          <TableCell className="text-right">COP 0.00</TableCell>
+                          <TableCell className="text-right">{token} 0.00</TableCell>
                         </TableRow>
                         <TableRow className="hover:bg-muted/50 font-semibold">
                           <TableCell>Total funds needed</TableCell>
-                          <TableCell className="text-right">COP 514,500,000.00</TableCell>
+                          <TableCell className="text-right">{token} 514,500,000.00</TableCell>
                         </TableRow>
                       </TableBody>
                     </Table>
@@ -175,23 +251,23 @@ export default function PropertyDetails() {
                       <TableBody>
                         <TableRow className="hover:bg-muted/50">
                           <TableCell className="font-medium">Gross rent per month</TableCell>
-                          <TableCell className="text-right">COP 2,200,000.00</TableCell>
+                          <TableCell className="text-right">{token} 2,200,000.00</TableCell>
                         </TableRow>
                         <TableRow className="hover:bg-muted/50">
                           <TableCell className="font-medium">Gross rent per year</TableCell>
-                          <TableCell className="text-right">COP 26,400,000.00</TableCell>
+                          <TableCell className="text-right">{token} 26,400,000.00</TableCell>
                         </TableRow>
                         <TableRow className="hover:bg-muted/50">
                           <TableCell className="font-medium">Monthly costs</TableCell>
-                          <TableCell className="text-right">COP 220,000.00</TableCell>
+                          <TableCell className="text-right">{token} 220,000.00</TableCell>
                         </TableRow>
                         <TableRow className="hover:bg-muted/50">
                           <TableCell className="font-medium">Net rent per month</TableCell>
-                          <TableCell className="text-right">COP 1,900,800.00</TableCell>
+                          <TableCell className="text-right">{token} 1,900,800.00</TableCell>
                         </TableRow>
                         <TableRow className="hover:bg-muted/50">
                           <TableCell className="font-medium">Net rent per year</TableCell>
-                          <TableCell className="text-right">COP 22,809,600.00</TableCell>
+                          <TableCell className="text-right">{token} 22,809,600.00</TableCell>
                         </TableRow>
                       </TableBody>
                     </Table>
@@ -204,19 +280,19 @@ export default function PropertyDetails() {
                       <TableBody>
                         <TableRow className="hover:bg-muted/50">
                           <TableCell className="font-medium">Insurance</TableCell>
-                          <TableCell className="text-right">COP 0.00</TableCell>
+                          <TableCell className="text-right">{token} 0.00</TableCell>
                         </TableRow>
                         <TableRow className="hover:bg-muted/50">
                           <TableCell className="font-medium">LaProp rent commission</TableCell>
-                          <TableCell className="text-right">COP 220,000.00</TableCell>
+                          <TableCell className="text-right">{token} 220,000.00</TableCell>
                         </TableRow>
                         <TableRow className="hover:bg-muted/50">
                           <TableCell className="font-medium">Property taxes</TableCell>
-                          <TableCell className="text-right">COP 0.00</TableCell>
+                          <TableCell className="text-right">{token} 0.00</TableCell>
                         </TableRow>
                         <TableRow className="hover:bg-muted/50">
                           <TableCell className="font-medium">Property management</TableCell>
-                          <TableCell className="text-right">COP 0.00</TableCell>
+                          <TableCell className="text-right">{token} 0.00</TableCell>
                         </TableRow>
                       </TableBody>
                     </Table>
@@ -252,7 +328,7 @@ export default function PropertyDetails() {
               <div className="space-y-4">
                 <div className="flex justify-between items-center">
                   <span className="text-sm">Starting from</span>
-                  <span className="font-semibold">1COP</span>
+                  <span className="font-semibold">1{token}</span>
                 </div>
                 <Progress value={33} className="h-2 bg-[#E5F4D4]" />
                 <div className="text-xs text-right">
@@ -285,13 +361,27 @@ export default function PropertyDetails() {
                     className="bg-black text-white h-12"
                   />
                 </div>
+                <TokenParticipationModal
+                  onSubmit={handleTokenParticipation}
+                  token={propertyID}
+                />
+
+                <div className="flex space-x-2">
+                  <Button className="w-full bg-black text-white h-12 hover:bg-black/90" onClick={()=>handleBuyTokens()}>
+                    BUY
+                  </Button>
+                  <Button className="w-full bg-black text-white h-12 hover:bg-black/90" onClick={()=>handleSellTokens()}>
+                    SELL
+                  </Button>
+                </div>
+
                 <Button className="w-full bg-black text-white h-12 hover:bg-black/90">
-                  PARTICIPATE →
+                  CLAIM
                 </Button>
               </div>
 
               <div className="flex justify-between items-center pt-4 border-t">
-                <span>Total(COP)</span>
+                <span>Total({token})</span>
                 <span className="font-semibold">$1</span>
               </div>
             </div>
