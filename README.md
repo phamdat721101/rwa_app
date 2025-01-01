@@ -2,10 +2,10 @@
 
 HomeBase is an innovative AI-powered platform designed to revolutionize the real estate industry by leveraging blockchain technology, specifically the BNB Chain. It serves as an intelligent agent for managing and tokenizing Real World Assets (RWA) in the real estate sector, providing a seamless bridge between traditional real estate and the world of decentralized finance (DeFi).
 
-## OP BNB Contract Address - Testnet
+## Ancient Contract Address - Testnet
 
 ```
-0x1E2D4f5499AD2c0a87B89620016dc11c7C9B85C2
+0x3d8b0922AF1422C83EeAD1951CB02e78413855C1
 ```
 
 ## Features
